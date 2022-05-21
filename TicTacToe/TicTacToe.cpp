@@ -1,5 +1,5 @@
 ﻿#include "pch.h"
-//#include <iostream>
+//#include "stdafx.h"
 #include <stdio.h>
 
 char board[3][3];
@@ -44,19 +44,22 @@ int main()
 		if (isComputer == 2)
 		{
 			PlayerMove('O');
-			winner = CheckWinner();
+		}
+		else
+		{
+			CompuerMove();
+		}
 
-			if (winner != ' ')
-			{
-				printf("Winner is : %c", winner);
-				break;
-			}
-
-			if (CheckFreeSpaces() == 0)
-			{
-				printf("There is no winner!");
-				break;
-			}
+		winner = CheckWinner();
+		if (winner != ' ')
+		{
+			printf("Winner is : %c", winner);
+			break;
+		}
+		if (CheckFreeSpaces() == 0)
+		{
+			printf("There is no winner!");
+			break;
 		}
 	}
 
