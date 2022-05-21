@@ -6,12 +6,24 @@ char board[3][3];
 void ResetBoard();
 void PrintBoard();
 void PlayerMove(char letter);
+void CompuerMove();
 char CheckWinner();
+int CheckFreeSpaces();
 
 int main()
 {
 	ResetBoard();
 	PrintBoard();
+	int isComputer = 1;
+
+	printf("Choose an option: \n");
+	printf("1. Play against the computer.\n");
+	printf("2. Play against other person.\n");
+	scanf_s("%d", &isComputer);
+	if (isComputer != 1 && isComputer != 2)
+	{
+		isComputer = 1;
+	}
 
 	while (true)
 	{
@@ -22,13 +34,28 @@ int main()
 			printf("Winner is : %c", winner);
 			break;
 		}
-
-		PlayerMove('O');
-		winner = CheckWinner();
-		if (winner != ' ')
+		if (CheckFreeSpaces() == 0)
 		{
-			printf("Winner is : %c", winner);
+			printf("There is no winner!");
 			break;
+		}
+
+		if (isComputer == 2)
+		{
+			PlayerMove('O');
+			winner = CheckWinner();
+
+			if (winner != ' ')
+			{
+				printf("Winner is : %c", winner);
+				break;
+			}
+
+			if (CheckFreeSpaces() == 0)
+			{
+				printf("There is no winner!");
+				break;
+			}
 		}
 	}
 
@@ -82,6 +109,27 @@ void PlayerMove(char letter)
 	{
 		printf("Not a valid cordinates.\n");
 	}
+}
+
+int CheckFreeSpaces()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (board[i][j] == ' ')
+			{
+				return 1;
+			}
+		}
+	}
+
+	return 0;
+}
+
+void CompuerMove()
+{
+
 }
 
 char CheckWinner()
