@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
-#include <iostream>
+//#include <iostream>
+#include <stdio.h>
 
 char board[3][3];
 
@@ -25,7 +26,7 @@ int main()
 		isComputer = 1;
 	}
 
-	while (true)
+	while (1)
 	{
 		PlayerMove('X');
 		char winner = CheckWinner();
