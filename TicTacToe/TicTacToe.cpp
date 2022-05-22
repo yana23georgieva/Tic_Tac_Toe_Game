@@ -17,52 +17,57 @@ int main()
 	ResetBoard();
 	PrintBoard();
 	int isComputer = 1;
+	int playAgain = 2;
 
-	printf("Choose an option: \n");
-	printf("1. Play against the computer.\n");
-	printf("2. Play against other person.\n");
-	scanf_s("%d", &isComputer);
-	if (isComputer != 1 && isComputer != 2)
+	do
 	{
-		isComputer = 1;
-	}
+		printf("Choose an option: \n");
+		printf("1. Play against the computer.\n");
+		printf("2. Play against other person.\n");
+		scanf_s("%d", &isComputer);
 
-	while (1)
-	{
-		PlayerMove('X');
-		char winner = CheckWinner();
-		if (winner != ' ')
+		while (1)
 		{
-			printf("Winner is : %c", winner);
-			break;
-		}
-		if (CheckFreeSpaces() == 0)
-		{
-			printf("There is no winner!");
-			break;
+			PlayerMove('X');
+			char winner = CheckWinner();
+			if (winner != ' ')
+			{
+				printf("Winner is : %c", winner);
+				break;
+			}
+			if (CheckFreeSpaces() == 0)
+			{
+				printf("There is no winner!");
+				break;
+			}
+
+			if (isComputer == 2)
+			{
+				PlayerMove('O');
+			}
+			else
+			{
+				CompuerMove();
+			}
+
+			winner = CheckWinner();
+			if (winner != ' ')
+			{
+				printf("Winner is : %c", winner);
+				break;
+			}
+			if (CheckFreeSpaces() == 0)
+			{
+				printf("There is no winner!");
+				break;
+			}
 		}
 
-		if (isComputer == 2)
-		{
-			PlayerMove('O');
-		}
-		else
-		{
-			CompuerMove();
-		}
+		printf("Do you want to play again?\n");
+		printf("1. Yes\n");
+		scanf_s("%d", &isComputer);
 
-		winner = CheckWinner();
-		if (winner != ' ')
-		{
-			printf("Winner is : %c", winner);
-			break;
-		}
-		if (CheckFreeSpaces() == 0)
-		{
-			printf("There is no winner!");
-			break;
-		}
-	}
+	} while (playAgain == 1);
 
 	return 0;
 }
