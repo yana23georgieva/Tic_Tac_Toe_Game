@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
-//#include "stdafx.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include<time.h>
 
 char board[3][3];
 
@@ -89,30 +90,29 @@ void PrintBoard()
 void PlayerMove(char letter)
 {
 	int row = 0, col = 0;
-	while (row < 1 || row > 3)
-	{
-		printf("Enter a number of row(1 to 3): ");
-		scanf_s("%d", &row);
-	}
 
-	while (col < 1 || col > 3)
+	do
 	{
-		printf("Enter a number of col(1 to 3): ");
-		scanf_s("%d", &col);
-	}
+		row = 0;
+		col = 0;
+		while (row < 1 || row > 3)
+		{
+			printf("Enter a number of row(1 to 3): ");
+			scanf_s("%d", &row);
+		}
 
-	row--;
-	col--;
+		while (col < 1 || col > 3)
+		{
+			printf("Enter a number of col(1 to 3): ");
+			scanf_s("%d", &col);
+		}
 
-	if (board[row][col] == ' ')
-	{
-		board[row][col] = letter;
-		PrintBoard();
-	}
-	else
-	{
-		printf("Not a valid cordinates.\n");
-	}
+		row--;
+		col--;
+	} while (board[row][col] != ' ');
+
+	board[row][col] = letter;
+	PrintBoard();
 }
 
 int CheckFreeSpaces()
@@ -133,7 +133,17 @@ int CheckFreeSpaces()
 
 void CompuerMove()
 {
+	srand(time(0));
+	int row, col;
 
+	do
+	{
+		row = rand() % 3;
+		col = rand() % 3;
+	} while (board[row][col] != ' ');
+
+	board[row][col] = 'O';
+	PrintBoard();
 }
 
 char CheckWinner()
